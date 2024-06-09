@@ -1,9 +1,6 @@
 .header {
   margin-top: 45px;
   margin-bottom: 40px;
-}
-
-.header__line {
-  border-bottom: 1px solid #545454;
-  margin-top: 40px;
+  padding-bottom: 41px;
+  border-bottom: 1px solid rgba(84, 84, 84, 1);
 }
