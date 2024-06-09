@@ -53,3 +53,7 @@ The page has six photo cards. The photos and location names are up to you.
 ### Video Link
 
 * https://drive.google.com/file/d/12ymL4PgwiQ1n4zuFyHGYLgkRIUDiS9qF/view?usp=sharing -Link to a video demonstarting the website at different breakpoints.
+
+### Github Pages Link
+
+* https://shaydaise.github.io/se_project_aroundtheus/
