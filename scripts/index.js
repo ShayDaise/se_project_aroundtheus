@@ -1,3 +1,7 @@
+const editButton = document.querySelector(".profile__edit-button");
+const modalContainer = document.querySelector(".modal");
+const modalCloseButton = document.querySelector(".modal__close");
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -24,3 +28,11 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+editButton.addEventListener("click", function () {
+  modalContainer.setAttribute("style", "display: flex");
+});
+
+modalCloseButton.addEventListener("click", function () {
+  modalContainer.setAttribute("style", "display: none");
+});
