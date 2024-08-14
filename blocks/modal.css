@@ -87,6 +87,29 @@
   padding-bottom: 13px;
 }
 
-.modal__form_input[name="title"] {
+.bottom__modifier {
   margin-bottom: 29px;
+}
+
+@media screen and (max-width: 580px) {
+  .modal__container {
+    max-width: 282px;
+    max-height: 322px;
+    padding: 25px 22px;
+  }
+
+  .bottom__modifier {
+    margin-bottom: 30px;
+  }
+
+  .modal__button {
+    margin-top: 45px;
+  }
+
+  .modal__close {
+    bottom: calc(100% + 13.62px);
+    left: calc(100% - 30px);
+    height: 26px;
+    width: 26px;
+  }
 }

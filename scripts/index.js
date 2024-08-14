@@ -1,6 +1,11 @@
 const editButton = document.querySelector(".profile__edit-button");
 const modalContainer = document.querySelector(".modal");
 const modalCloseButton = document.querySelector(".modal__close");
+const profileTitile = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+const modalDescInput = document.querySelector("#modal-description-input");
+const modalTitleInput = document.querySelector("#modal-title-input");
+const profileEditForm = modalContainer.querySelector(".modal__form");
 
 const initialCards = [
   {
@@ -29,10 +34,26 @@ const initialCards = [
   },
 ];
 
+// functions----------------------------------------------------------------------
+function closePopUp() {
+  modalContainer.setAttribute("style", "display: none");
+}
+
+// Event Handlers-----------------------------------------------------------------
+function HandleProfileEditSubmit(e) {
+  e.preventDefault();
+  profileDescription.textContent = modalDescInput.value;
+  profileTitile.textContent = modalTitleInput.value;
+  console.log("submitted");
+  closePopUp();
+}
+// Event Listeners----------------------------------------------------------------
 editButton.addEventListener("click", function () {
+  modalDescInput.value = profileDescription.textContent;
+  modalTitleInput.value = profileTitile.textContent;
   modalContainer.setAttribute("style", "display: flex");
 });
 
-modalCloseButton.addEventListener("click", function () {
-  modalContainer.setAttribute("style", "display: none");
-});
+modalCloseButton.addEventListener("click", closePopUp());
+
+profileEditForm.addEventListener("submit", HandleProfileEditSubmit);
