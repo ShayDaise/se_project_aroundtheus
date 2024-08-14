@@ -87,7 +87,7 @@
   padding-bottom: 13px;
 }
 
-.bottom__modifier {
+.modal__bottom-modifier {
   margin-bottom: 29px;
 }
 
@@ -98,7 +98,7 @@
     padding: 25px 22px;
   }
 
-  .bottom__modifier {
+  .modal__bottom-modifier {
     margin-bottom: 30px;
   }
 
