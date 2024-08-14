@@ -6,6 +6,8 @@ const profileDescription = document.querySelector(".profile__description");
 const modalDescInput = document.querySelector("#modal-description-input");
 const modalTitleInput = document.querySelector("#modal-title-input");
 const profileEditForm = modalContainer.querySelector(".modal__form");
+const cardList = document.querySelector(".cards__list");
+const cardTemplate = document.querySelector("#card-template").content;
 
 const initialCards = [
   {
@@ -38,7 +40,22 @@ const initialCards = [
 function closePopUp() {
   modalContainer.setAttribute("style", "display: none");
 }
+function getCardElement(cardData) {
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  // clone the template element with all its content and store it in a cardElement variable
+  // access the card title and image and store them in variables
+  // set the path to the image to the link field of the object
+  // set the image alt text to the name field of the object
+  // set the card title to the name field of the object, too
+  // return the ready HTML element with the filled-in data
+  const cardImageElement = cardElement.querySelector(".card__image");
+  const cardTitleElement = cardElement.querySelector(".card__title");
 
+  cardTitleElement.textContent = cardData.name;
+  cardImageElement.setAttribute("alt", `${cardData.name}`);
+  cardImageElement.setAttribute("src", `${cardData.link}`);
+  return cardElement;
+}
 // Event Handlers-----------------------------------------------------------------
 function HandleProfileEditSubmit(e) {
   e.preventDefault();
@@ -54,6 +71,11 @@ editButton.addEventListener("click", function () {
   modalContainer.setAttribute("style", "display: flex");
 });
 
-modalCloseButton.addEventListener("click", closePopUp());
+modalCloseButton.addEventListener("click", closePopUp);
 
 profileEditForm.addEventListener("submit", HandleProfileEditSubmit);
+
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  cardList.prepend(cardElement);
+});
