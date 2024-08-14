@@ -38,7 +38,7 @@ const initialCards = [
 
 // functions----------------------------------------------------------------------
 function closePopUp() {
-  modalContainer.setAttribute("style", "display: none");
+  modalContainer.classList.remove("modal_opened");
 }
 function getCardElement(cardData) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -57,7 +57,7 @@ function getCardElement(cardData) {
   return cardElement;
 }
 // Event Handlers-----------------------------------------------------------------
-function HandleProfileEditSubmit(e) {
+function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileDescription.textContent = modalDescInput.value;
   profileTitile.textContent = modalTitleInput.value;
@@ -68,12 +68,12 @@ function HandleProfileEditSubmit(e) {
 editButton.addEventListener("click", function () {
   modalDescInput.value = profileDescription.textContent;
   modalTitleInput.value = profileTitile.textContent;
-  modalContainer.setAttribute("style", "display: flex");
+  modalContainer.classList.add("modal_opened");
 });
 
 modalCloseButton.addEventListener("click", closePopUp);
 
-profileEditForm.addEventListener("submit", HandleProfileEditSubmit);
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
