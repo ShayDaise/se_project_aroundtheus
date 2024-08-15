@@ -108,6 +108,13 @@
     padding: 25px 22px;
   }
 
+  .modal__input {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 14px;
+    color: black;
+  }
+
   .modal__bottom-modifier {
     margin-bottom: 30px;
   }
