@@ -61,6 +61,30 @@
       </div>
     </div>
 
+    <div class="modal photo-modal">
+      <div class="modal__container">
+        <button class="modal__close photo-modal-close"></button>
+        <p class="modal__heading">New Place</p>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="title"
+            class="modal__input modal__bottom-modifier"
+            placeholder="Title"
+            id="modal-title-input"
+          />
+          <input
+            type="text"
+            name="image-link"
+            class="modal__input"
+            placeholder="Image Link"
+            id="modal-image-input"
+          />
+          <button class="modal__button">Create</button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image" />
