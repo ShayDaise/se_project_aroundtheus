@@ -9,6 +9,9 @@ const profileDescription = document.querySelector(".profile__description");
 const modalDescInput = document.querySelector("#modal-description-input");
 const modalTitleInput = document.querySelector("#modal-title-input");
 const profileEditForm = editModal.querySelector(".modal__form");
+const photoTitleInput = photoModal.querySelector(".modal__input_type_title");
+const photoImageInput = photoModal.querySelector(".modal__input_type_url");
+const photoAddForm = photoModal.querySelector(".modal__form");
 const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content;
 
@@ -68,6 +71,22 @@ function handleProfileEditSubmit(e) {
   closePopUp(editModal);
 }
 
+function handlePhotoSubmit(e) {
+  e.preventDefault();
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardImageElement = cardElement.querySelector(".card__image");
+  const cardTitleElement = cardElement.querySelector(".card__title");
+
+  cardImageElement.setAttribute("src", `${photoImageInput.value}`);
+  cardTitleElement.textContent = photoTitleInput.value;
+  cardImageElement.setAttribute("alt", `${photoTitleInput.value}`);
+
+  cardList.prepend(cardElement);
+  photoTitleInput.value = "";
+  photoImageInput.value = "";
+  closePopUp(photoModal);
+}
+
 // Event Listeners----------------------------------------------------------------
 editButton.addEventListener("click", () => {
   modalDescInput.value = profileDescription.textContent;
@@ -78,6 +97,7 @@ addDestinationBtn.addEventListener("click", () => openModal(photoModal));
 editModalCloseButton.addEventListener("click", () => closePopUp(editModal));
 photoCloseBtn.addEventListener("click", () => closePopUp(photoModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+photoAddForm.addEventListener("submit", handlePhotoSubmit);
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
