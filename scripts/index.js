@@ -1,14 +1,14 @@
 const editButton = document.querySelector(".profile__edit-button");
 const addDestinationBtn = document.querySelector(".profile__add-button");
 const photoModal = document.querySelector(".photo-modal");
-const modalContainer = document.querySelector(".modal");
+const editModal = document.querySelector("#edit-modal");
 const modalCloseButton = document.querySelector(".modal__close");
 const photoCloseBtn = document.querySelector(".photo-modal-close");
 const profileTitile = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const modalDescInput = document.querySelector("#modal-description-input");
 const modalTitleInput = document.querySelector("#modal-title-input");
-const profileEditForm = modalContainer.querySelector(".modal__form");
+const profileEditForm = editModal.querySelector(".modal__form");
 const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content;
 
@@ -42,7 +42,7 @@ const initialCards = [
 // functions----------------------------------------------------------------------
 function closePopUp() {
   photoModal.classList.remove("modal_opened");
-  modalContainer.classList.remove("modal_opened");
+  editModal.classList.remove("modal_opened");
 }
 function getCardElement(cardData) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -73,16 +73,14 @@ function handleProfileEditSubmit(e) {
 editButton.addEventListener("click", function () {
   modalDescInput.value = profileDescription.textContent;
   modalTitleInput.value = profileTitile.textContent;
-  modalContainer.classList.add("modal_opened");
+  editModal.classList.add("modal_opened");
 });
 
 addDestinationBtn.addEventListener("click", function () {
   photoModal.classList.add("modal_opened");
 });
-
 modalCloseButton.addEventListener("click", closePopUp);
 photoCloseBtn.addEventListener("click", closePopUp);
-
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 initialCards.forEach((cardData) => {
