@@ -14,6 +14,10 @@ const cardImageInput = addCardModal.querySelector(".modal__input_type_url");
 const cardAddForm = addCardModal.querySelector(".modal__form");
 const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content;
+const photoModal = document.querySelector("#photo-modal");
+const photoCloseBtn = photoModal.querySelector(".modal__close");
+const photoImg = photoModal.querySelector(".modal__picture");
+const photoText = photoModal.querySelector(".modal__photo-text");
 
 const initialCards = [
   {
@@ -73,6 +77,12 @@ function getCardElement(cardData) {
   cardTitleElement.textContent = cardData.name;
   cardImageElement.setAttribute("alt", `${cardData.name}`);
   cardImageElement.setAttribute("src", `${cardData.link}`);
+
+  cardImageElement.addEventListener("click", () => {
+    photoText.textContent = cardTitleElement.textContent;
+    photoImg.src = cardImageElement.src;
+    openModal(photoModal);
+  });
   return cardElement;
 }
 
@@ -106,6 +116,7 @@ editModalCloseButton.addEventListener("click", () => closePopUp(editModal));
 cardCloseBtn.addEventListener("click", () => closePopUp(addCardModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 cardAddForm.addEventListener("submit", handlePhotoSubmit);
+photoCloseBtn.addEventListener("click", () => closePopUp(photoModal));
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardList);
