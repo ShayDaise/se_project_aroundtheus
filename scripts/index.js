@@ -51,10 +51,24 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
 }
 
+function renderCard(cardData, list) {
+  const cardElement = getCardElement(cardData);
+
+  list.prepend(cardElement);
+}
+
 function getCardElement(cardData) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button-active");
+  });
 
   cardTitleElement.textContent = cardData.name;
   cardImageElement.setAttribute("alt", `${cardData.name}`);
@@ -73,15 +87,9 @@ function handleProfileEditSubmit(e) {
 
 function handlePhotoSubmit(e) {
   e.preventDefault();
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
-
-  cardImageElement.setAttribute("src", `${photoImageInput.value}`);
-  cardTitleElement.textContent = photoTitleInput.value;
-  cardImageElement.setAttribute("alt", `${photoTitleInput.value}`);
-
-  cardList.prepend(cardElement);
+  const name = photoTitleInput.value;
+  const link = photoImageInput.value;
+  renderCard({ name, link }, cardList);
   photoTitleInput.value = "";
   photoImageInput.value = "";
   closePopUp(photoModal);
@@ -100,6 +108,5 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 photoAddForm.addEventListener("submit", handlePhotoSubmit);
 
 initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardList.prepend(cardElement);
+  renderCard(cardData, cardList);
 });
