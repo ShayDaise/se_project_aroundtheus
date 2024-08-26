@@ -1,17 +1,17 @@
 const editButton = document.querySelector(".profile__edit-button");
 const addDestinationBtn = document.querySelector(".profile__add-button");
-const photoModal = document.querySelector("#photo-modal");
+const addCardModal = document.querySelector("#add-card-modal");
 const editModal = document.querySelector("#edit-modal");
 const editModalCloseButton = editModal.querySelector(".modal__close");
-const photoCloseBtn = photoModal.querySelector(".modal__close");
+const cardCloseBtn = addCardModal.querySelector(".modal__close");
 const profileTitile = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const modalDescInput = document.querySelector("#modal-description-input");
 const modalTitleInput = document.querySelector("#modal-title-input");
 const profileEditForm = editModal.querySelector(".modal__form");
-const photoTitleInput = photoModal.querySelector(".modal__input_type_title");
-const photoImageInput = photoModal.querySelector(".modal__input_type_url");
-const photoAddForm = photoModal.querySelector(".modal__form");
+const cardTitleInput = addCardModal.querySelector(".modal__input_type_title");
+const cardImageInput = addCardModal.querySelector(".modal__input_type_url");
+const cardAddForm = addCardModal.querySelector(".modal__form");
 const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content;
 
@@ -87,12 +87,12 @@ function handleProfileEditSubmit(e) {
 
 function handlePhotoSubmit(e) {
   e.preventDefault();
-  const name = photoTitleInput.value;
-  const link = photoImageInput.value;
+  const name = cardTitleInput.value;
+  const link = cardImageInput.value;
   renderCard({ name, link }, cardList);
-  photoTitleInput.value = "";
-  photoImageInput.value = "";
-  closePopUp(photoModal);
+  cardTitleInput.value = "";
+  cardImageInput.value = "";
+  closePopUp(addCardModal);
 }
 
 // Event Listeners----------------------------------------------------------------
@@ -101,11 +101,11 @@ editButton.addEventListener("click", () => {
   modalTitleInput.value = profileTitile.textContent;
   openModal(editModal);
 });
-addDestinationBtn.addEventListener("click", () => openModal(photoModal));
+addDestinationBtn.addEventListener("click", () => openModal(addCardModal));
 editModalCloseButton.addEventListener("click", () => closePopUp(editModal));
-photoCloseBtn.addEventListener("click", () => closePopUp(photoModal));
+cardCloseBtn.addEventListener("click", () => closePopUp(addCardModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-photoAddForm.addEventListener("submit", handlePhotoSubmit);
+cardAddForm.addEventListener("submit", handlePhotoSubmit);
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardList);
