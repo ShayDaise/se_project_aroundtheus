@@ -117,6 +117,10 @@
   text-align: left;
 }
 
+.modal__button_disabled {
+  opacity: 0.2;
+}
+
 .modal__bottom-modifier {
   margin-bottom: 29px;
 }
