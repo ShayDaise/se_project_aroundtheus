@@ -4,6 +4,8 @@
   color: red;
   opacity: 0;
   transition: opacity 0.3s;
+  text-align: left;
+  align-self: baseline;
 }
 
 .popup__input_type_error {
