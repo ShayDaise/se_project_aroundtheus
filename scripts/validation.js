@@ -1,5 +1,5 @@
 const config = {
-  formSelector: ".popup__form",
+  formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
@@ -49,12 +49,12 @@ function toggleButtonState(
 function setEventListensers(form, config) {
   const { inputSelector } = config;
   const inputElements = [...form.querySelectorAll(inputSelector)];
-  const submitButton = form.querySelector(".modal__button");
+  const { submitButtonSelector } = config;
 
   inputElements.forEach((input) => {
     input.addEventListener("input", (evt) => {
       checkInputValidity(form, input, config);
-      toggleButtonState(inputElements, submitButton, config);
+      toggleButtonState(inputElements, submitButtonSelector, config);
     });
   });
   console.log(inputElements);

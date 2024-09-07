@@ -1,4 +1,5 @@
 const editButton = document.querySelector(".profile__edit-button");
+const modals = [...document.querySelectorAll(".modal")];
 const page = document.querySelector(".page");
 const addDestinationBtn = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
@@ -50,11 +51,17 @@ const initialCards = [
 // functions---------------------------------------------------------------------
 
 function closeAnyModal() {
-  const modals = [...document.querySelectorAll(".modal")];
   modals.forEach((modal) => closePopUp(modal));
 }
 
-function overlayClose(evt) {
+function handleCloseWithEsc(evt) {
+  if (evt.key === "Escape") {
+    closeAnyModal();
+    console.log(evt.key);
+  }
+}
+
+function handleOverlayClose(evt) {
   if (
     evt.target.classList.contains("modal") ||
     evt.target.classList.contains("modal__close")
@@ -65,10 +72,12 @@ function overlayClose(evt) {
 
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+  page.removeEventListener("keydown", handleCloseWithEsc);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  page.addEventListener("keydown", handleCloseWithEsc);
 }
 
 function renderCard(cardData, list) {
@@ -129,21 +138,13 @@ editButton.addEventListener("click", () => {
   openModal(editModal);
 });
 addDestinationBtn.addEventListener("click", () => openModal(addCardModal));
-editModalCloseButton.addEventListener("click", () => closePopUp(editModal));
-cardCloseBtn.addEventListener("click", () => closePopUp(addCardModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 cardAddForm.addEventListener("submit", handlePhotoSubmit);
-photoCloseBtn.addEventListener("click", () => closePopUp(photoModal));
-page.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
-    closeAnyModal();
-    console.log(evt.key);
-  }
-});
+page.addEventListener("keydown", handleCloseWithEsc);
 
-editModal.addEventListener("mousedown", overlayClose);
-addCardModal.addEventListener("mousedown", overlayClose);
-photoModal.addEventListener("mousedown", overlayClose);
+editModal.addEventListener("mousedown", handleOverlayClose);
+addCardModal.addEventListener("mousedown", handleOverlayClose);
+photoModal.addEventListener("mousedown", handleOverlayClose);
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardList);
