@@ -47,15 +47,22 @@ const initialCards = [
   },
 ];
 
-// functions----------------------------------------------------------------------
-function checkTarget (evt) {
-  if (evt.target.classList.include)
-}
+// functions---------------------------------------------------------------------
 
-function closeWithEscape() {
+function closeAnyModal() {
   const modals = [...document.querySelectorAll(".modal")];
   modals.forEach((modal) => closePopUp(modal));
 }
+
+function overlayClose(evt) {
+  if (
+    evt.target.classList.contains("modal") ||
+    evt.target.classList.contains("modal__close")
+  ) {
+    closeAnyModal();
+  }
+}
+
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
 }
@@ -129,10 +136,14 @@ cardAddForm.addEventListener("submit", handlePhotoSubmit);
 photoCloseBtn.addEventListener("click", () => closePopUp(photoModal));
 page.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
-    closeWithEscape();
+    closeAnyModal();
     console.log(evt.key);
   }
 });
+
+editModal.addEventListener("mousedown", overlayClose);
+addCardModal.addEventListener("mousedown", overlayClose);
+photoModal.addEventListener("mousedown", overlayClose);
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardList);
