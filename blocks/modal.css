@@ -121,8 +121,8 @@
   opacity: 0.2;
 }
 
-.modal__bottom-modifier {
-  margin-bottom: 29px;
+.modal__top-modifier {
+  margin-top: 29px;
 }
 
 .modal__close:hover {
