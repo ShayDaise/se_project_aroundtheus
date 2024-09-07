@@ -1,4 +1,5 @@
 const editButton = document.querySelector(".profile__edit-button");
+const page = document.querySelector(".page");
 const addDestinationBtn = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
 const editModal = document.querySelector("#edit-modal");
@@ -47,6 +48,14 @@ const initialCards = [
 ];
 
 // functions----------------------------------------------------------------------
+function checkTarget (evt) {
+  if (evt.target.classList.include)
+}
+
+function closeWithEscape() {
+  const modals = [...document.querySelectorAll(".modal")];
+  modals.forEach((modal) => closePopUp(modal));
+}
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
 }
@@ -118,6 +127,12 @@ cardCloseBtn.addEventListener("click", () => closePopUp(addCardModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 cardAddForm.addEventListener("submit", handlePhotoSubmit);
 photoCloseBtn.addEventListener("click", () => closePopUp(photoModal));
+page.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closeWithEscape();
+    console.log(evt.key);
+  }
+});
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardList);
