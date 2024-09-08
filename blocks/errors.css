@@ -1,11 +1,18 @@
+.modal__form-field {
+  position: relative;
+  max-width: 430px;
+  width: 100%;
+}
+
 .popup__error {
   font-size: 12px;
   line-height: 15px;
   color: red;
   opacity: 0;
   transition: opacity 0.3s;
-  text-align: left;
-  align-self: baseline;
+  position: absolute;
+  top: calc(100%);
+  left: 0;
 }
 
 .popup__input_type_error {
