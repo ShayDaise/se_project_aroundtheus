@@ -61,7 +61,7 @@ function handleCloseWithEsc(evt) {
   }
 }
 
-function handleOverlayClose(evt) {
+function handleModalClose(evt) {
   if (
     evt.target.classList.contains("modal") ||
     evt.target.classList.contains("modal__close")
@@ -140,11 +140,9 @@ editButton.addEventListener("click", () => {
 addDestinationBtn.addEventListener("click", () => openModal(addCardModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 cardAddForm.addEventListener("submit", handlePhotoSubmit);
-page.addEventListener("keydown", handleCloseWithEsc);
-
-editModal.addEventListener("mousedown", handleOverlayClose);
-addCardModal.addEventListener("mousedown", handleOverlayClose);
-photoModal.addEventListener("mousedown", handleOverlayClose);
+editModal.addEventListener("mousedown", handleModalClose);
+addCardModal.addEventListener("mousedown", handleModalClose);
+photoModal.addEventListener("mousedown", handleModalClose);
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardList);
