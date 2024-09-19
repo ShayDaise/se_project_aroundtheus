@@ -1,11 +1,10 @@
+import { Card } from "../components/Card.js";
 const editButton = document.querySelector(".profile__edit-button");
 const modals = [...document.querySelectorAll(".modal")];
 const page = document.querySelector(".page");
 const addDestinationBtn = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
 const editModal = document.querySelector("#edit-modal");
-const editModalCloseButton = editModal.querySelector(".modal__close");
-const cardCloseBtn = addCardModal.querySelector(".modal__close");
 const profileTitile = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const modalDescInput = document.querySelector("#modal-description-input");
@@ -15,11 +14,9 @@ const cardTitleInput = addCardModal.querySelector(".modal__input_type_title");
 const cardImageInput = addCardModal.querySelector(".modal__input_type_url");
 const cardAddForm = addCardModal.querySelector(".modal__form");
 const cardList = document.querySelector(".cards__list");
-const cardTemplate = document.querySelector("#card-template").content;
 const photoModal = document.querySelector("#photo-modal");
-const photoCloseBtn = photoModal.querySelector(".modal__close");
-const photoImg = photoModal.querySelector(".modal__picture");
-const photoText = photoModal.querySelector(".modal__photo-text");
+
+const cardSelector = "#card-template";
 
 const initialCards = [
   {
@@ -75,41 +72,16 @@ function closePopUp(modal) {
   page.removeEventListener("keydown", handleCloseWithEsc);
 }
 
-function openModal(modal) {
+export function openModal(modal) {
   modal.classList.add("modal_opened");
   page.addEventListener("keydown", handleCloseWithEsc);
 }
 
-function renderCard(cardData, list) {
-  const cardElement = getCardElement(cardData);
+function renderCard(cardData, cardSelector, list) {
+  const cardElement = new Card(cardData, cardSelector);
+  const card = cardElement.getView();
 
-  list.prepend(cardElement);
-}
-
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button-active");
-  });
-
-  cardTitleElement.textContent = cardData.name;
-  cardImageElement.setAttribute("alt", `${cardData.name}`);
-  cardImageElement.setAttribute("src", `${cardData.link}`);
-
-  cardImageElement.addEventListener("click", () => {
-    photoText.textContent = cardTitleElement.textContent;
-    photoImg.src = cardImageElement.src;
-    photoImg.alt = cardTitleElement.textContent;
-    openModal(photoModal);
-  });
-  return cardElement;
+  list.prepend(card);
 }
 
 // Event Handlers-----------------------------------------------------------------
@@ -125,7 +97,7 @@ function handlePhotoSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
-  renderCard({ name, link }, cardList);
+  renderCard({ name, link }, cardSelector, cardList);
   cardTitleInput.value = "";
   cardImageInput.value = "";
   closePopUp(addCardModal);
@@ -145,5 +117,5 @@ addCardModal.addEventListener("mousedown", handleModalClose);
 photoModal.addEventListener("mousedown", handleModalClose);
 
 initialCards.forEach((cardData) => {
-  renderCard(cardData, cardList);
+  renderCard(cardData, cardSelector, cardList);
 });
