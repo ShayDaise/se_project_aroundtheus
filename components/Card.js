@@ -13,15 +13,7 @@ export class Card {
       ".card__delete-button"
     );
     cardImage.addEventListener("click", () => {
-      const photoModal = document.querySelector("#photo-modal");
-      const photoImg = photoModal.querySelector(".modal__picture");
-      const photoText = photoModal.querySelector(".modal__photo-text");
-      const cardImageElement = this._cardElement.querySelector(".card__image");
-      const cardTitleElement = this._cardElement.querySelector(".card__title");
-      photoText.textContent = cardTitleElement.textContent;
-      photoImg.src = cardImageElement.src;
-      photoImg.alt = cardTitleElement.textContent;
-      openModal(photoModal);
+      this._handleImageClick();
     });
     likeButton.addEventListener("click", () => {
       likeButton.classList.toggle("card__like-button-active");
@@ -30,6 +22,18 @@ export class Card {
       this._cardElement.remove();
     });
     //
+  }
+
+  _handleImageClick() {
+    const photoModal = document.querySelector("#photo-modal");
+    const photoImg = photoModal.querySelector(".modal__picture");
+    const photoText = photoModal.querySelector(".modal__photo-text");
+    const cardImageElement = this._cardElement.querySelector(".card__image");
+    const cardTitleElement = this._cardElement.querySelector(".card__title");
+    photoText.textContent = cardTitleElement.textContent;
+    photoImg.src = cardImageElement.src;
+    photoImg.alt = cardTitleElement.textContent;
+    openModal(photoModal);
   }
 
   getView() {
