@@ -47,6 +47,17 @@ const initialCards = [
 ];
 
 // functions---------------------------------------------------------------------
+function handleImageClick() {
+  const photoModal = document.querySelector("#photo-modal");
+  const photoImg = photoModal.querySelector(".modal__picture");
+  const photoText = photoModal.querySelector(".modal__photo-text");
+  const cardImageElement = this._cardElement.querySelector(".card__image");
+  const cardTitleElement = this._cardElement.querySelector(".card__title");
+  photoText.textContent = cardTitleElement.textContent;
+  photoImg.src = cardImageElement.src;
+  photoImg.alt = cardTitleElement.textContent;
+  openModal(photoModal);
+}
 
 function closeAnyModal() {
   modals.forEach((modal) => closePopUp(modal));
@@ -78,9 +89,14 @@ export function openModal(modal) {
   page.addEventListener("keydown", handleCloseWithEsc);
 }
 
-function renderCard(cardData, cardSelector, list) {
-  const cardElement = new Card(cardData, cardSelector);
+function createCard(cardData, cardSelector, handleImageClick) {
+  const cardElement = new Card(cardData, cardSelector, handleImageClick);
   const card = cardElement.getView();
+  return card;
+}
+
+function renderCard(cardData, cardSelector, list, handleImageClick) {
+  const card = createCard(cardData, cardSelector, handleImageClick);
 
   list.prepend(card);
 }
@@ -98,7 +114,7 @@ function handlePhotoSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
-  renderCard({ name, link }, cardSelector, cardList);
+  renderCard({ name, link }, cardSelector, cardList, handleImageClick);
   cardTitleInput.value = "";
   cardImageInput.value = "";
   closePopUp(addCardModal);
@@ -118,7 +134,7 @@ addCardModal.addEventListener("mousedown", handleModalClose);
 photoModal.addEventListener("mousedown", handleModalClose);
 
 initialCards.forEach((cardData) => {
-  renderCard(cardData, cardSelector, cardList);
+  renderCard(cardData, cardSelector, cardList, handleImageClick);
 });
 
 const config = {

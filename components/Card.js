@@ -1,10 +1,9 @@
-import { openModal } from "../pages/index.js";
-
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this.handleImageClick = handleImageClick;
   }
   _setEventListeners() {
     const cardImage = this._cardElement.querySelector(".card__image");
@@ -13,7 +12,7 @@ export class Card {
       ".card__delete-button"
     );
     cardImage.addEventListener("click", () => {
-      this._handleImageClick();
+      this.handleImageClick();
     });
     likeButton.addEventListener("click", () => {
       likeButton.classList.toggle("card__like-button-active");
@@ -22,18 +21,6 @@ export class Card {
       this._cardElement.remove();
     });
     //
-  }
-
-  _handleImageClick() {
-    const photoModal = document.querySelector("#photo-modal");
-    const photoImg = photoModal.querySelector(".modal__picture");
-    const photoText = photoModal.querySelector(".modal__photo-text");
-    const cardImageElement = this._cardElement.querySelector(".card__image");
-    const cardTitleElement = this._cardElement.querySelector(".card__title");
-    photoText.textContent = cardTitleElement.textContent;
-    photoImg.src = cardImageElement.src;
-    photoImg.alt = cardTitleElement.textContent;
-    openModal(photoModal);
   }
 
   getView() {
