@@ -1,4 +1,5 @@
 import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
 const editButton = document.querySelector(".profile__edit-button");
 const modals = [...document.querySelectorAll(".modal")];
 const page = document.querySelector(".page");
@@ -118,4 +119,19 @@ photoModal.addEventListener("mousedown", handleModalClose);
 
 initialCards.forEach((cardData) => {
   renderCard(cardData, cardSelector, cardList);
+});
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const forms = document.querySelectorAll(config.formSelector);
+forms.forEach((form) => {
+  const formValidator = new FormValidator(config, form);
+  formValidator.enableValidation();
 });
