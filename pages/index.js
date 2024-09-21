@@ -49,13 +49,10 @@ const initialCards = [
 ];
 
 // functions---------------------------------------------------------------------
-function handleImageClick(evt) {
-  const cardElement = evt.target.closest(".card");
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
-  photoText.textContent = cardTitleElement.textContent;
-  photoImg.src = cardImageElement.src;
-  photoImg.alt = cardTitleElement.textContent;
+function handleImageClick(name, link) {
+  photoText.textContent = name;
+  photoImg.src = link;
+  photoImg.alt = name;
   openModal(photoModal);
 }
 

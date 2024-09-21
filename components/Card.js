@@ -11,8 +11,8 @@ export class Card {
     const deleteButton = this._cardElement.querySelector(
       ".card__delete-button"
     );
-    cardImage.addEventListener("click", (evt) => {
-      this.handleImageClick(evt);
+    cardImage.addEventListener("click", () => {
+      this.handleImageClick(this._name, this._link);
     });
     likeButton.addEventListener("click", () => {
       likeButton.classList.toggle("card__like-button-active");
