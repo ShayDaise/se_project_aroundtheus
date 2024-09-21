@@ -16,6 +16,8 @@ const cardImageInput = addCardModal.querySelector(".modal__input_type_url");
 const cardAddForm = addCardModal.querySelector(".modal__form");
 const cardList = document.querySelector(".cards__list");
 const photoModal = document.querySelector("#photo-modal");
+const photoImg = photoModal.querySelector(".modal__picture");
+const photoText = photoModal.querySelector(".modal__photo-text");
 
 const cardSelector = "#card-template";
 
@@ -47,12 +49,10 @@ const initialCards = [
 ];
 
 // functions---------------------------------------------------------------------
-function handleImageClick() {
-  const photoModal = document.querySelector("#photo-modal");
-  const photoImg = photoModal.querySelector(".modal__picture");
-  const photoText = photoModal.querySelector(".modal__photo-text");
-  const cardImageElement = this._cardElement.querySelector(".card__image");
-  const cardTitleElement = this._cardElement.querySelector(".card__title");
+function handleImageClick(evt) {
+  const cardElement = evt.target.closest(".card");
+  const cardImageElement = cardElement.querySelector(".card__image");
+  const cardTitleElement = cardElement.querySelector(".card__title");
   photoText.textContent = cardTitleElement.textContent;
   photoImg.src = cardImageElement.src;
   photoImg.alt = cardTitleElement.textContent;
